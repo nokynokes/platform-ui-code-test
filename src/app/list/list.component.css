@@ -8,3 +8,27 @@
 h2 {
   border-bottom: 1px solid lightgray;
 }
+
+.card {
+  height: 40%;
+  width: 10%;
+  display: inline-block;
+  border: groove;
+  position: relative;
+}
+
+.plus {
+  position: absolute;
+  width: 15%;
+  height: 40%;
+  right: 0;
+  top: 0;
+}
+
+.cancel {
+  position: absolute;
+  width: 15%;
+  height: 40%;
+  right: 0;
+  top: 0;
+}

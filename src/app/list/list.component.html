@@ -1,4 +1,21 @@
 <div class="list-container">
   <h2>Providers</h2>
-
+  <div class="unselected">
+    <h3>Unselected</h3>
+    <div *ngFor="let provider of unselectedProviders" class="card">
+        <img class="plus" (click)="handleUnselected(provider)" src="../../assets/261370-200.png"/>
+        <div> {{ provider.name }} </div>
+        <div> {{ provider.address }} </div>
+        <div> {{ provider.phone }} </div>
+    </div>
+  </div>
+  <div class="selected">
+    <h3>Selected</h3>
+    <div *ngFor="let provider of selectedProviders" class="card">
+        <img class="cancel" (click)="handleSelected(provider)" src="../../assets/66847.png"/>
+        <div> {{ provider.name }} </div>
+        <div> {{ provider.address }} </div>
+        <div> {{ provider.phone }} </div>
+    </div>
+  </div>
 </div>

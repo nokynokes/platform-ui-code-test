@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { L } from '@angular/core/src/render3';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-list',
@@ -28,9 +30,43 @@ export class ListComponent implements OnInit {
       phone: '4343219384'
     }
   ];
+  
+  private unSelectedKey = "unselected";
+  private selectedKey = "selected";
 
-  constructor() {}
+  constructor(private _localStorageService: LocalStorageService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const unselected = this._localStorageService.getItemByKey(this.unSelectedKey);
+    if(!!unselected) {
+      this.unselectedProviders = unselected;
+    }
+
+    const selected = this._localStorageService.getItemByKey(this.selectedKey);
+    if(!!selected) {
+      this.selectedProviders = selected;
+    }
+  }
+
+  public handleUnselected(provider) {
+    this.selectedProviders.push(provider);
+
+    this.unselectedProviders = this.unselectedProviders.filter((p) => p.id !== provider.id);
+
+    this.syncLocalStorage();
+  }
+
+  public handleSelected(provider) {
+    this.unselectedProviders.push(provider);
+
+    this.selectedProviders = this.selectedProviders.filter((p) => p.id !== provider.id);
+
+    this.syncLocalStorage();
+  }
+
+  private syncLocalStorage() {
+    this._localStorageService.setItemByKey(this.unSelectedKey, this.unselectedProviders);
+    this._localStorageService.setItemByKey(this.selectedKey, this.selectedProviders);
+  }
 
 }
